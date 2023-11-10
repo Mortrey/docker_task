@@ -1,4 +1,5 @@
-FROM nginx:alpine
+# для практических целей лучше конечно выбрать какую то конкретную версию образа alpine
+FROM nginx:alpine 
 
 COPY nginx.conf /etc/nginx/nginx.conf
 
