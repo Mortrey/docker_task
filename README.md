@@ -2,7 +2,7 @@
 docker assignments in devops course
 
 Задание 1.1
-В папке nginxtask создаем файл nginx.conf в котором прописываем возможность запрета POST запросов.
+В папке nginx_task создаем файл nginx.conf в котором прописываем возможность запрета POST запросов.
 для этого нам потребуется сначала запустить контейнер командой (естественно образ nginx:alpine я предварительно загрузил и назвал его nginx:alpine):
 
   docker run --rm -d --name nginx nginx:alpine
