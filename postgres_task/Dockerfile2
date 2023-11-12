@@ -1,0 +1,10 @@
+# Используем официальный образ PostgreSQL с Docker Hub в качестве базового образа
+FROM postgres:latest
+
+# Устанавливаем переменные окружения
+ENV POSTGRES_DB=test
+ENV POSTGRES_USER=test
+ENV POSTGRES_PASSWORD=testpassword
+
+# Копируем файлы с настройками в контейнер
+COPY ./init.sql /docker-entrypoint-initdb.d/
