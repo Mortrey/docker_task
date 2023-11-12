@@ -26,12 +26,43 @@
 
 # Задание 1.2
 
-docker build -t ________ .
+Возможны два варианта решения данного задания. В первом мы используем Dockerfile который заберет с hub.docker.com образ latest и переменными окружения задаст пользователя и базу, сборка по вот этой команде:
 
-Запускаем командой
-docker run --name _________ -e POSTGRES_PASSWORD=password -d student04_1_2
+    docker build -t my_postgres .
 
-Заходим внутрь контейнера от пользователя test
-docker exec -it student04_pdb psql -U test
+Запускаем командой:
 
-командами \du \l проверяем список пользователей и список баз данных и убеждаемся о наличии
+    docker run --name test_postgres -e POSTGRES_PASSWORD=testpassword -d my_postgres
+
+или с volume:
+
+    docker run --name test_postgres -e POSTGRES_PASSWORD=testpassword -d -v custom-postgres-data:/var/lib/postgresql/data my_postgres
+
+Пароль мы специально не задаем в образе это считается дурным тоном, а передаем при запуске контейнера, эта переменная окружения является обязательной
+
+Заходим внутрь контейнера от пользователя test:
+
+    docker exec -it test_postgres psql -U test
+
+Проверить наличие пользователя мы можем командой:
+
+    \du
+
+Проверить налицие базы данных мы можем командой:
+
+    \l
+
+Ну и стандартная проверка:
+
+    SELECT 1;
+
+Второй способ связан с созданием файла init.sql этот образ сохранен в файле Dockerfile2 для него можно иcпользовать следующие команды запуска:
+
+    docker build -f Dockerfile2 C:\Users\pavel\docker_tasks\Postgres -t mypostgres2
+    docker run -d --name mypostgres2 mypostgres2 
+    docker start mypostgres2
+    docker exec -it mypostgres2 psql -U test
+
+Но первый способ кажется мне гораздо приятнее и проще
+
+
