@@ -59,6 +59,24 @@
 
     SELECT 1;
 
+Для удобства работы можно сразу же поднять контейнер с apsche superset:
+
+    docker run -d -p 8080:8088 -e "SUPERSET_SECRET_KEY=your_secret_key_here" --name superset apache/superset
+    
+    docker exec -it superset superset fab create-admin \
+              --username admin \
+              --firstname Superset \
+              --lastname Admin \
+              --email admin@superset.com \
+              --password admin
+
+    docker exec -it superset superset db upgrade
+
+    docker exec -it superset superset init
+
+Подключение  http://localhost:8080/login/ -- u/p: [admin/admin]
+
+
 Второй способ связан с созданием файла init.sql этот образ сохранен в файле Dockerfile2 для него можно иcпользовать следующие команды запуска:
 
     docker build -f Dockerfile2 C:\Users\pavel\docker_tasks\Postgres -t mypostgres2
