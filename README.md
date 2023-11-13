@@ -32,7 +32,7 @@
 
 Запускаем командой:
 
-    docker run --name test_postgres -e POSTGRES_PASSWORD=testpassword -d my_postgres
+    docker run --name test_postgres -e POSTGRES_PASSWORD=testpassword -d -p 5432:5432 my_postgres
 
 или с volume:
 
@@ -59,7 +59,7 @@
 Второй способ связан с созданием файла init.sql этот образ сохранен в файле Dockerfile2 для него можно иcпользовать следующие команды запуска:
 
     docker build -f Dockerfile2 C:\Users\pavel\docker_tasks\Postgres -t mypostgres2
-    docker run -d --name mypostgres2 mypostgres2 
+    docker run -d --name mypostgres2 -p 5432:5432 mypostgres2 
     docker start mypostgres2
     docker exec -it mypostgres2 psql -U test
 
